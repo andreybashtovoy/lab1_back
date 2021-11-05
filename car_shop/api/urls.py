@@ -5,6 +5,6 @@ from .views import InvoiceListAPIView
 app_name = 'todo-api'
 urlpatterns = [
 
-    path('', InvoiceListAPIView.as_view(), name='list'),
+    path('', InvoiceListAPIView.as_view({'get': 'list', 'post': 'create'}), name='list'),
 
 ]

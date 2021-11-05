@@ -1,3 +1,4 @@
+from rest_framework.relations import PrimaryKeyRelatedField
 from rest_framework.serializers import (
     HyperlinkedIdentityField,
     ModelSerializer
@@ -36,9 +37,10 @@ class OrderSerializer(ModelSerializer):
 
 
 class InvoiceSerializer(ModelSerializer):
-    car = CarSerializer(many=False, read_only=True)
-    order = OrderSerializer(many=False, read_only=True)
+    car = PrimaryKeyRelatedField(many=False, queryset=Car.objects.all())
+    order = PrimaryKeyRelatedField(many=False, queryset=Order.objects.all())
 
     class Meta:
         model = Invoice
         fields = '__all__'
+
